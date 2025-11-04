@@ -1,0 +1,10 @@
+toml
+[versions]
+# ... other versions
+glance = "1.1.0-rc01" # Or the latest version
+
+[libraries]
+# ... other libraries
+androidx-glance = { group = "androidx.glance", name = "glance", version.ref = "glance" }
+androidx-glance-appwidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glance" }
+
