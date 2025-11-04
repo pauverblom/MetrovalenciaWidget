@@ -6,7 +6,7 @@
     android:background="@android:color/system_accent2_800"
     android:clipToOutline="false"
     android:hapticFeedbackEnabled="true"
-    android:theme="@style/Theme.AtbWidget.AppWidgetContainer">
+    android:theme="@style/Theme.MetrovalenciaWidget.AppWidgetContainer">
 
     <TextView
         android:id="@+id/errorTextView"

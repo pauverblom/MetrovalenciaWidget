@@ -6,13 +6,13 @@ plugins {
 
 
 android {
-    namespace = "com.example.atbwidget"
-    compileSdk = 34
+    namespace = "com.metrovalencia.widget"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.atbwidget"
+        applicationId = "com.metrovalencia.widget"
         minSdk = 34
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 

@@ -1,4 +1,4 @@
-package com.example.atbwidget
+package com.example.metrovalenciawidget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -62,11 +62,12 @@ data class TimeData(
 )
 
 
-class AtbWidget : AppWidgetProvider() {
+class MetrovalenciaWidget : AppWidgetProvider() {
 
     companion object {
         const val BUTTON_CLICK = "com.example.BUTTON_CLICK"
     }
+    //https://astro-entur-api-example.vercel.app/api/search-departures?query=Voll%20studentby
 
     private val okhttpclient: OkHttpClient = OkHttpClient()
 
@@ -78,7 +79,7 @@ class AtbWidget : AppWidgetProvider() {
 
         val remoteViews = createRemoteViews(context, appWidgetId)
 
-        val atbWidget = ComponentName(context, AtbWidget::class.java)
+        val metrovalenciaWidget = ComponentName(context, MetrovalenciaWidget::class.java)
 
         val powerManager = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
@@ -115,12 +116,12 @@ class AtbWidget : AppWidgetProvider() {
         val requestUrl =
             "https://atb-prod.api.mittatb.no/bff/v2/departures/realtime?quayIds=NSR%3AQuay%3A72401&quayIds=NSR%3AQuay%3A72402&quayIds=NSR%3AQuay%3A75707&quayIds=NSR%3AQuay%3A71940&quayIds=NSR%3AQuay%3A74610&quayIds=NSR%3AQuay%3A74609&limit=12&timeRange=100000&startTime=$encodedDate"
 
-        resetTextViews(textViewIds, stopPrefixes, remoteViews, appWidgetManager, atbWidget)
+        resetTextViews(textViewIds, stopPrefixes, remoteViews, appWidgetManager, metrovalenciaWidget)
 
         if (powerManager.isPowerSaveMode && !powerManager.isIgnoringBatteryOptimizations(context.packageName)) {
             widgetSetErrorResponse(
                 textViewIds,
-                atbWidget,
+                metrovalenciaWidget,
                 appWidgetManager,
                 "Please enable unrestricted battery usage",
                 remoteViews
@@ -140,7 +141,7 @@ class AtbWidget : AppWidgetProvider() {
                 override fun onFailure(call: Call, e: IOException) {
                     widgetSetErrorResponse(
                         textViewIds,
-                        atbWidget,
+                        metrovalenciaWidget,
                         appWidgetManager,
                         e.message,
                         remoteViews
@@ -153,7 +154,7 @@ class AtbWidget : AppWidgetProvider() {
                         if (!response.isSuccessful) {
                             widgetSetErrorResponse(
                                 textViewIds,
-                                atbWidget,
+                                metrovalenciaWidget,
                                 appWidgetManager,
                                 "Error accessing URL: " + response.code.toString(),
                                 remoteViews
@@ -304,7 +305,7 @@ class AtbWidget : AppWidgetProvider() {
                         remoteViews.setTextViewText(R.id.textView4, "Drg: $textTimeFromDragvoll")
 
                         remoteViews.setViewVisibility(R.id.progressBar2, View.INVISIBLE)
-                        appWidgetManager.updateAppWidget(atbWidget, remoteViews)
+                        appWidgetManager.updateAppWidget(metrovalenciaWidget, remoteViews)
 
                     }
                 }
@@ -370,10 +371,10 @@ class AtbWidget : AppWidgetProvider() {
     }
 
     private fun createRemoteViews(context: Context, appWidgetId: Int): RemoteViews {
-        val views = RemoteViews(context.packageName, R.layout.atb_widget)
+        val views = RemoteViews(context.packageName, R.layout.metrovalencia_widget)
 
         // Set up the PendingIntent for the button
-        val updateWidgetIntent = Intent(context, AtbWidget::class.java).apply {
+        val updateWidgetIntent = Intent(context, MetrovalenciaWidget::class.java).apply {
             action = BUTTON_CLICK
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         }
@@ -448,7 +449,7 @@ fun resetTextViews(
     stopPrefixes: List<String>,
     remoteViews: RemoteViews,
     appWidgetManager: AppWidgetManager,
-    atbWidget: ComponentName
+    metrovalenciaWidget: ComponentName
 ) {
 
     for (i in textViewIds.indices) {
@@ -459,12 +460,12 @@ fun resetTextViews(
     }
     remoteViews.setViewVisibility(R.id.errorTextView, View.GONE)
     remoteViews.setViewVisibility(R.id.progressBar2, View.VISIBLE)
-    appWidgetManager.updateAppWidget(atbWidget, remoteViews)
+    appWidgetManager.updateAppWidget(metrovalenciaWidget, remoteViews)
 }
 
 fun widgetSetErrorResponse(
     textViewIds: List<Int>,
-    atbWidget: ComponentName,
+    metrovalenciaWidget: ComponentName,
     appWidgetManager: AppWidgetManager,
     errorMessage: String?,
     remoteViews: RemoteViews
@@ -475,6 +476,6 @@ fun widgetSetErrorResponse(
     remoteViews.setViewVisibility(R.id.errorTextView, View.VISIBLE)
     remoteViews.setTextViewText(R.id.errorTextView, errorMessage)
     remoteViews.setViewVisibility(R.id.progressBar2, View.INVISIBLE)
-    appWidgetManager.updateAppWidget(atbWidget, remoteViews)
+    appWidgetManager.updateAppWidget(metrovalenciaWidget, remoteViews)
 }
 

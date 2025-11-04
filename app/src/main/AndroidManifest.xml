@@ -17,9 +17,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AtbWidget">
+        android:theme="@style/Theme.MetrovalenciaWidget">
         <receiver
-            android:name=".AtbWidget"
+            android:name=".MetrovalenciaWidget"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -27,7 +27,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/atb_widget_info" />
+                android:resource="@xml/metrovalencia_widget_info" />
         </receiver>
     </application>
 

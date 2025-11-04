@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Atb Widget"
+rootProject.name = "Metrovalencia Widget"
 include(":app")
  
